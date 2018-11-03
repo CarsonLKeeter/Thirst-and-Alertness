@@ -1,0 +1,43 @@
+---
+title: "Alertness and Thirst Change"
+author: "Carson Keeter"
+date: "October 2018"
+output: html_document
+---
+
+Rmcorr estimates the common regression slope, the association shared among individuals, and does not violate the assumption of independence of observations. With this we can assure that the changes in thirst are associated with changes in alertness (R2 = .29, p <.001)
+
+---
+
+Below are the R packages used in this analysis
+
+``` {r}
+library(rmcorr)
+library(ggplot2)
+library(tidyverse)
+library(tidyr)
+library(rmarkdown)
+
+```
+
+---
+
+The descriptive summary for our data (df = dataframe, .RData = file type) is in the table below: 
+
+```{r df}
+load(file = "df.RData")
+summary(df)
+ggplot(df, aes(x = TC, y = AC, group = factor(Num)), color = factor(Num)) + 
+  geom_line(aes(y = my_rmc$model$fitted.values), linetype = 2) +
+  geom_point(aes(color = factor(Num)), show.legend = FALSE) + 
+  (x = "Thirst Change", y = "Alert Change", title = "Alertness and Thirst Change", subtitle = "p-value < 0.0001, rrm = .2969", caption = "Brought to you by: University of Wyoming Hydration Physiology Lab")
+```
+
+---
+
+Below is the code used for visualization of Alertness and Thirst
+
+```{r code}
+load(file = "Thirst_Data.RData")
+print("Thirst_Data.RData")
+```
